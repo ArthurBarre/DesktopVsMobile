@@ -8,10 +8,15 @@ var
   height = window.innerHeight,
   player = new Player(),
   friction = 0.9,
-  gravity = 0.4;
+  gravity = 0.4,
+  bomb = new Bomb();
 
 canvas.width = width;
 canvas.height = height;
+
+var remote1 = function() {
+  player.color = getRandomRgb();
+}
 
 var loop = function() {
   ctx.clearRect(0, 0, width, height);
@@ -21,6 +26,7 @@ var loop = function() {
   
 
   player.draw()
+  bomb.draw();
   
 
   if (!pause) {
