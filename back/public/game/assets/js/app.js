@@ -7,34 +7,25 @@ socket.on('buttonUpdate', function(){
   player.color = getRandomRgb()
 });
 socket.on('newBomb', function(){
-  for (i=0;i<10;i++){
     new Bomb();
-  }
-
 });
 
 var 
   keys = [],
   pause= false,
   bombs = [],
+    platforms=[],
   width = window.innerWidth,
   height = window.innerHeight,
   player = new Player(),
   friction = 0.9,
   gravity = 0.4,
-  bomb = new Bomb();
+  bomb = new Bomb(),
+  platform  = new Platform(0,(height-50),width,65);
 
 
 canvas.width = width;
 canvas.height = height;
-
-var remote1 = function() {
-  player.color = getRandomRgb();
-}
-
-var remote2 = function() {
-
-}
 
 var loop = function() {
   ctx.clearRect(0, 0, width, height);
@@ -45,7 +36,11 @@ var loop = function() {
   bombs.forEach(bomb => {
     bomb.draw();
   });
-  player.draw()
+  platforms.forEach(platform=>{
+    platform.draw()
+  });
+
+  player.draw();
   
 
   if (!pause) {
