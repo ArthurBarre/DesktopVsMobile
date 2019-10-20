@@ -1,6 +1,12 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
+var socket = io.connect();
+
+socket.on('buttonUpdate', function(){
+  player.color = getRandomRgb()
+});
+
 var 
   keys = [],
   pause= false,

@@ -16,9 +16,8 @@ io.on('connection', function(client) {
     console.log('Client connected...');
     //when the server receives clicked message, do this
     client.on('clicked', function(data) {
-        clickCount++;
         //send a message to ALL connected clients
-        io.emit('buttonUpdate', clickCount);
+        io.emit('buttonUpdate');
     });
 });
 
