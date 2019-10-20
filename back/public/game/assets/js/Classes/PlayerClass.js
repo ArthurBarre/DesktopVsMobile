@@ -7,6 +7,7 @@ class Player {
     this.velX = 0;
     this.velY = 0;
     this.color = getRandomRgb();
+    this.life = 100;
   }
 
   draw() {
