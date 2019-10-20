@@ -1,6 +1,9 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
+var playerImg = new Image();
+playerImg.src =  "assets/imgs/player.png";
+
 var 
   keys = [],
   pause= false,
@@ -8,8 +11,6 @@ var
   width = window.innerWidth,
   height = window.innerHeight,
   player = new Player(),
-  friction = 0.9,
-  gravity = 0.4,
   bomb = new Bomb();
 
 
