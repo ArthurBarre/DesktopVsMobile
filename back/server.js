@@ -9,6 +9,7 @@ app.get('/remote',function(req,res,next){
 app.get('/game',function(req,res,next){
     res.sendFile(__dirname+'/public/game.html')
 });
+app.use(express.static('public'));
 io.on('connection', function(client) {
     console.log('Client connected...');
     //when the server receives clicked message, do this
