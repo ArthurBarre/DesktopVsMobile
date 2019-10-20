@@ -6,6 +6,12 @@ var socket = io.connect();
 socket.on('buttonUpdate', function(){
   player.color = getRandomRgb()
 });
+socket.on('newBomb', function(){
+  for (i=0;i<10;i++){
+    new Bomb();
+  }
+
+});
 
 var 
   keys = [],
@@ -27,7 +33,7 @@ var remote1 = function() {
 }
 
 var remote2 = function() {
-  new Bomb();
+
 }
 
 var loop = function() {

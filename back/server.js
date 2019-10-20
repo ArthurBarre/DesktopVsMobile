@@ -19,6 +19,10 @@ io.on('connection', function(client) {
         //send a message to ALL connected clients
         io.emit('buttonUpdate');
     });
+    client.on('newBomb', function(data) {
+        //send a message to ALL connected clients
+        io.emit('newBomb');
+    });
 });
 
 //start our web server and socket.io server listening
