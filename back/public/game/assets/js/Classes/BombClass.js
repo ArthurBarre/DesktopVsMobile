@@ -1,6 +1,8 @@
 class Bomb {
   constructor() {
     this.radius = 10,
+    this.width =  this.radius*2,
+    this.height = this.radius*2,
     this.x = width/2;
     this.y = 0;
     this.velX = getRandomNumber(-50, 50);
@@ -16,6 +18,7 @@ class Bomb {
 
   draw() {
     if (this.render) {
+
       if(this.y + this.radius > height ) {
         this.y = height - this.radius;
         this.velY = -this.velY / 2
@@ -29,6 +32,7 @@ class Bomb {
         this.x = width-this.radius;
         this.velX = -this.velX/2
       }
+
       ctx.fillStyle = this.color;
       if (this.explode) {
         if (this.radius < 100) {
@@ -37,11 +41,16 @@ class Bomb {
         }  else {
           this.render = false;
         }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y+this.radius-10, this.radius, 0, 2 * 3.1415);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * 3.1415);
+        ctx.fill();
       }
       
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, 2 * 3.1415);
-      ctx.fill();
+
   
   
   

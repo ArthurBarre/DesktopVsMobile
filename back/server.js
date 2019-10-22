@@ -3,7 +3,7 @@ var app = express();
 var clickCount = 0;
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-app.use(express.static('public/'));
+app.use(express.static('public'));
 
 app.get('/remote',function(req,res,next){
     res.sendFile(__dirname+'/public/remote/remote.html')

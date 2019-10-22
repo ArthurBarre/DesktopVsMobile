@@ -16,15 +16,13 @@ var
   keys = [],
   pause= false,
   bombs = [],
-    platforms=[],
-  width = window.innerWidth,
-  height = window.innerHeight,
+  platforms=[],
+  width = 1200,
+  height = 800,
   player = new Player(),
-  bomb = new Bomb(),
   friction = 0.9,
   gravity = 0.4,
-  bomb = new Bomb(),
-  platform  = new Platform(0,(height-50),width,65);
+  platform  = new Platform(200,600,200,50);
 
 canvas.width = width;
 canvas.height = height;
