@@ -8,21 +8,20 @@ class Player {
     this.y = 100;
     this.velX = 0;
     this.velY = 0;
-    this.color = getRandomRgb();
-    this.life = 100;
-    this.friction = 0.9;
-    this.gravity = 0.7;
-    this.speed = 1.5;
-    this.jumpPower = 20;
+    this.friction = 0.8;
+    this.speed = 2;
+    this.jumpPower = 25;
+    this.collision = [];
+    this.jump = true;
+    this.color = 'transparent';
+    this.bounce = 0;
   }
 
   draw() {
-    this.velX *= this.friction;
-    this.velY += this.gravity;
-
     if ( this.y + this.height >= height ) {
       this.y = height-this.height;
       this.velY = 0;
+      this.jump = false;
     }
 
       /**
@@ -36,20 +35,16 @@ class Player {
       //GO LEFT
       this.velX -= this.speed;
     }
-    if ( keys[32] && this.velY == 0 ) {
+    if ( keys[32] && !this.jump ) {
       // JUMP
+      this.jump = true;
       this.velY = -this.jumpPower;
     }
 
-    // platforms.forEach(platform => {
-    //   if (this.x + this.width >= platform.x && this.y + this.width < ) {
-    //     this.velX = 0;
-    //   }
-    // });
+    engine(player);
 
-    this.x += this.velX;
-    this.y += this.velY;
-
+    ctx.fillStyle = this.color
+    ctx.fillRect(this.x, this.y, this.width, this.height)
     ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
   }
 }
