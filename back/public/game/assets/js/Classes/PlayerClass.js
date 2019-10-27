@@ -8,7 +8,7 @@ class Player {
     this.velY = 0;
     this.friction = 0.8;
     this.speed = 2;
-    this.jumpPower = 15;
+    this.jumpPower = 20;
     this.jump = true;
     this.color = 'transparent';
   }
@@ -34,7 +34,7 @@ class Player {
     if ( player.y > height + 200) {
       player.y = 0
       player.x = width/2
-      player.velY = 0
+      //player.velY = 0
     }
 
     engine(player);
