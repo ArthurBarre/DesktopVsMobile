@@ -12,6 +12,7 @@ socket.on('newBomb', function(){
     new Bomb();
 });
 
+
 var 
   keys = [],
   pause= false,
@@ -22,10 +23,33 @@ var
   player = new Player(),
   gravity = 1;
 
-new Platform(0,0,50,height)
-new Platform(1150,0,50,height)
-new Platform(100,700,1000,50)
+// new Platform(0,0,50,height)
+// new Platform(1150,0,50,height)
+// new Platform(100,700,1000,50)
 new Bomb()
+
+function loadJSON() {   
+  var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+  xobj.open('GET', 'assets/maps/map1572205743785.json', true); // Replace 'my_data' with the path to your file
+  xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          console.log(xobj.responseText)
+          platformss = JSON.parse(xobj.responseText)
+          platformss.forEach(element => {
+            let x =  element.x;
+            let y = element.y;
+            let width = element.width;
+            let height = element.height;
+            new Platform(x, y, width, height)
+          });
+        }
+  };
+  xobj.send(null);  
+}
+
+loadJSON()
 
 canvas.width = width;
 canvas.height = height;
