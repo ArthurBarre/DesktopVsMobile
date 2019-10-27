@@ -21,7 +21,11 @@ var
   friction = 0.9,
   gravity = 0.4,
   bomb = new Bomb(),
-  platform  = new Platform(0,(height-50),width,65);
+  platform  =[
+    new Platform(0,(height-50),width,65,"white"),
+    new Platform(width/2,(height-350),20,65,"red")
+
+  ];
 
 
 canvas.width = width;
@@ -30,7 +34,7 @@ canvas.height = height;
 var loop = function() {
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle='rgb(0,0,0)';
-  ctx.fillRect(0,0,width, height)
+  ctx.fillRect(0,0,width, height);
 
   
   bombs.forEach(bomb => {
