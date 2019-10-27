@@ -1,5 +1,3 @@
-//import { runInThisContext } from "vm";
-
 class Player {
   constructor() {
     this.width = 30;
@@ -10,20 +8,12 @@ class Player {
     this.velY = 0;
     this.friction = 0.8;
     this.speed = 2;
-    this.jumpPower = 25;
-    this.collision = [];
+    this.jumpPower = 15;
     this.jump = true;
     this.color = 'transparent';
-    this.bounce = 0;
   }
 
   draw() {
-    if ( this.y + this.height >= height ) {
-      this.y = height-this.height;
-      this.velY = 0;
-      this.jump = false;
-    }
-
       /**
     * CONTROLS
     */
@@ -39,6 +29,12 @@ class Player {
       // JUMP
       this.jump = true;
       this.velY = -this.jumpPower;
+    }
+
+    if ( player.y > height + 200) {
+      player.y = 0
+      player.x = width/2
+      player.velY = 0
     }
 
     engine(player);

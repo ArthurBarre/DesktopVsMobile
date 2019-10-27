@@ -20,9 +20,12 @@ var
   width = 1200,
   height = 800,
   player = new Player(),
-  friction = 0.8,
-  gravity = 1,
-  platform  = new Platform(200,600,500,50);
+  gravity = 1;
+
+new Platform(0,0,50,height)
+new Platform(1150,0,50,height)
+new Platform(100,700,1000,50)
+new Bomb()
 
 canvas.width = width;
 canvas.height = height;
@@ -32,44 +35,66 @@ var engine = function(element) {
   element.velY += gravity;
 
   platforms.forEach(platform => {
-    if (
-      element.x + element.width + element.velX > platform.x &&
-      element.x + element.velX < platform.x+platform.width &&
-      element.y + element.height + element.velY > platform.y &&
-      element.y + element.velY < platform.y+platform.height
+    // TOP COLLISION
+    if ( 
+      element.y + element.height + element.velY >= platform.y && 
+      element.y < platform.y + platform.height &&
+      element.x + element.width > platform.x &&
+      element.x < platform.x + platform.width
     ) {
-      if ( element.y + element.height + element.velY >= platform.y && 
-        element.x + element.width > platform.x &&
-        element.x < platform.x + platform.width
-      ) {
-        console.log("top")
-        element.velY = 0 + element.bounce;
+      element.velY = 0 + ( platform.y - (element.y + element.height) )
+      if (element.jump) {
         element.jump = false;
       }
-      if ( element.x + element.width + element.velX > platform.x && element.y + element.width > platform.y) {
-        element.velX = 0 + element.bounce;
-        console.log("left")
+      if (element.bounce)  {
+        element.y = platform.y - element.radius;
+        element.velY = -element.velY/element.bounce;
       }
-      if ( element.x + element.velX < platform.x + platform.width && element.y + element.width > platform.y) {
-        element.velX = 0 + element.bounce;
-        console.log("right")
+    }
+    // // BOTTOM COLLISION
+    if ( 
+      element.y + element.velY <= platform.y + platform.height && 
+      element.y > platform.y &&
+      element.x + element.width > platform.x &&
+      element.x < platform.x + platform.width
+    ) {
+      element.velY = 0 + ( (platform.y + platform.height) - element.y);
+      if (element.bounce)  {
+        element.y = platform.y + platform.height + element.radius;
+        element.velY = element.velY/element.bounce;
       }
-      if ( element.y + element.velY <= platform.y + platform.height && 
-        element.x + element.width > platform.x &&
-        element.x < platform.x + platform.width
-      ) {
-        element.velY = 0 - element.bounce;
-        console.log("bottom")
+    }
+    // LEFT COLLISION
+    if ( 
+      element.x + element.width + element.velX >= platform.x && 
+      element.x < platform.x + platform.width &&
+      element.y + element.height > platform.y && 
+      element.y < platform.y + platform.height
+    ) {
+      element.velX = 0 + ( platform.x - ( element.x + element.width ) );
+      if (element.bounce)  {
+        element.x = platform.x - element.radius;
+        element.velX = -element.velX/element.bounce;
+      }
+    }
+    // RIGHT COLLISION
+    if ( 
+      element.x + element.velX <= platform.x + platform.width && 
+      element.x + element.width > platform.x &&
+      element.y + element.height > platform.y &&
+      element.y < platform.y + platform.height
+    ) {
+      element.velX = 0 + ( (platform.x + platform.width) - element.x);
+      if (element.bounce)  {
+        element.x = platform.x + platform.width + element.radius;
+        element.velX = -element.velX/element.bounce;
       }
     }
   });
 
-
   element.x += element.velX;
   element.y += element.velY;
 }
-
-new Bomb();
 
 var loop = function() {
   ctx.clearRect(0, 0, width, height);
@@ -80,7 +105,6 @@ var loop = function() {
 
   bombs.forEach(bomb => {
     bomb.draw();
-    engine(bomb);
   });
   platforms.forEach(platform=>{
     platform.draw()
