@@ -24,7 +24,7 @@ var
 
 new Platform(0,0,50,height)
 new Platform(1150,0,50,height)
-//©new Platform(100,700,1000,50)
+new Platform(100,700,1000,50)
 new Bomb()
 
 canvas.width = width;

@@ -34,7 +34,7 @@ class Player {
     if ( player.y > height + 200) {
       player.y = 0
       player.x = width/2
-      //player.velY = 0
+      player.velY = 0
     }
 
     engine(player);
