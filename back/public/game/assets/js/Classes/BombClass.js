@@ -5,7 +5,7 @@ class Bomb {
     this.height = this.radius,
     this.x = width/2;
     this.y = 0;
-    this.velX = getRandomNumber;
+    this.velX = getRandomNumber(-50, 50);
     this.velY = 0;
     this.color = 'yellow';
     this.friction = 0.99;
