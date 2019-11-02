@@ -36,7 +36,7 @@ document.querySelector('main').addEventListener('click', (event) => {
   if (click) {
     click = false;
     pointX2 = event.clientX;
-    pointY2 = event.clientY;
+    pointY2 = event.clientY -50;
     let platX, platY, platWidth, platHeight
     if ( pointX > pointX2 ) {
       platX = pointX2;
@@ -58,7 +58,7 @@ document.querySelector('main').addEventListener('click', (event) => {
   } else {
     click = true;
     pointX = event.clientX;
-    pointY = event.clientY;
+    pointY = event.clientY - 50;
   }
 })
 

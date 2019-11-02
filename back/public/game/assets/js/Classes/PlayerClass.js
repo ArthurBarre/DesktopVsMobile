@@ -43,4 +43,8 @@ class Player {
     ctx.fillRect(this.x, this.y, this.width, this.height)
     ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
   }
+
+  emitSparks() {
+    new Particle(3, getRandomNumber(this.x, this.x+this.width), this.y+this.height, "white", "random")
+  }
 }
