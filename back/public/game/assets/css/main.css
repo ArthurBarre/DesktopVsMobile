@@ -3,7 +3,7 @@
 body {
 	width: 100%;
 	text-align:center;
-	background: darkred;
+	background: rgb(19, 19, 40);
 }
 
 canvas {

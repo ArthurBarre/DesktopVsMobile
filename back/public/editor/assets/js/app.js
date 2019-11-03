@@ -5,7 +5,7 @@ var ctx = canvas.getContext('2d');
 var 
   keys = [],
   platforms = [],
-  width = 1200,
+  width = 1216,
   height = 800;
 
 canvas.width = width;
@@ -38,11 +38,11 @@ var background = function(value) {
   ctx.fillStyle='rgb(0,0,0)';
   ctx.fillRect(0,0,width, height)
 
-  for (let x = 0; x <= width/20; x++) {
-    for (let y = 0; y <= height/20; y++) {
+  for (let x = 0; x <= width/32; x++) {
+    for (let y = 0; y <= height/32; y++) {
       ctx.fillStyle = 'rgba(255,255,255,0.3)'
       ctx.beginPath()
-      ctx.arc(x*20, y*20, 2, 0, 2 * 3.1415)
+      ctx.arc(x*32, y*32, 2, 0, 2 * 3.1415)
       ctx.fill();
     }
   }
@@ -51,8 +51,8 @@ var background = function(value) {
 document.querySelector('main').addEventListener('click', (event) => {
   if (click) {
     click = false;
-    pointX2 = Math.round(event.clientX/20)*20
-    pointY2 = (Math.round(event.clientY/20)*20) - 40
+    pointX2 = Math.round(event.clientX/32)*32
+    pointY2 = (Math.round(event.clientY/32)*32) - 32
     let platX, platY, platWidth, platHeight
     if ( pointX > pointX2 ) {
       platX = pointX2;
@@ -75,8 +75,8 @@ document.querySelector('main').addEventListener('click', (event) => {
     }
   } else {
     click = true;
-    pointX = Math.round(event.clientX/20)*20
-    pointY = (Math.round(event.clientY/20)*20) - 40
+    pointX = Math.round(event.clientX/32)*32
+    pointY = (Math.round(event.clientY/32)*32) - 32
   }
 })
 

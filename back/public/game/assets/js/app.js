@@ -1,7 +1,7 @@
 // CANVAS SETUP
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-var width = 1200
+var width = 1216
 var height = 800
 canvas.width = width
 canvas.height = height
@@ -21,14 +21,14 @@ socket.on('newBomb', function(){
 
 var counter = 0;
 
-var instance = new Instance('map1572730340905')
+var instance = new Instance('map1572783598572')
 // var player = new Player()
 
 var loop = function() {
   ctx.clearRect(0, 0, width/2, height)
 
   // BACKGROUND
-  ctx.fillStyle='rgb(0,0,0)';
+  ctx.fillStyle='rgb(50,50,150)';
   ctx.fillRect(0,0,width, height)
 
   ctx.font = "30px Arial";

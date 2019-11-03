@@ -48,7 +48,6 @@ class Instance {
       ) {
         element.velY = 0 + ( platform.y - (element.y + element.height) )
         element.jump = false;
-        platform.y+= 0.2
       } else if ( 
         element.y + element.velY <= platform.y + platform.height && 
         element.y > platform.y &&
@@ -80,7 +79,7 @@ class Instance {
         }
       }
     })
-    if ((sparksL || sparksR ) && element.velY >= 0) {
+    if ((sparksL || sparksR ) && element.velY > 0) {
       counter++;
       if (counter === 4) {
         element.emitSparks();

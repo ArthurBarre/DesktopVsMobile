@@ -39,7 +39,7 @@ class Player {
 
     // AUTO RESPAWN IF FALLING
     if ( this.y > height + 200) {
-      this.y = 700
+      this.y = 100
       this.x = width/2
       this.velY = 0
     }
