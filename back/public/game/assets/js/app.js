@@ -1,51 +1,42 @@
+// CANVAS SETUP
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+var width = 1200
+var height = 800
+canvas.width = width
+canvas.height = height
 
-var socket = io.connect();
+// IMAGES IMPORTS
+var playerImg = new Image()
+playerImg.src = "assets/imgs/player.png"
+var socket = io.connect()
 
-socket.on('buttonUpdate', function(){
+// REMOTE ACTIONS
+socket.on('buttonUpdate', function () {
   player.color = getRandomRgb()
 });
-socket.on('newBomb', function(){
-    new Bomb();
+socket.on('newBomb', function () {
+  new Bomb()
 });
 
-var 
-  keys = [],
-  pause= false,
-  bombs = [],
-    platforms=[],
-  width = window.innerWidth,
-  height = window.innerHeight,
-  player = new Player(),
-  friction = 0.9,
-  gravity = 0.4,
-  bomb = new Bomb(),
-  platform  =[
-    new Platform(0,(height-50),width,65,"white"),
-    new Platform(width/2,(height-350),20,65,"red")
 
-  ];
+var counter = 0;
 
+var instance = new Instance('map1572730340905')
+// var player = new Player()
 
-canvas.width = width;
-canvas.height = height;
+var loop = function () {
+  ctx.clearRect(0, 0, width / 2, height)
 
-var loop = function() {
-  ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle='rgb(0,0,0)';
-  ctx.fillRect(0,0,width, height);
+  // BACKGROUND
+  ctx.fillStyle = 'rgb(0,0,0)';
+  ctx.fillRect(0, 0, width, height);
 
-  
-  bombs.forEach(bomb => {
-    bomb.draw();
-  });
-  platforms.forEach(platform=>{
-    platform.draw()
-  });
+  ctx.font = "30px Arial";
+  ctx.fillStyle = 'white'
+  ctx.fillText(Math.round(instance.player.life * 10) / 10, 100, 50);
 
-  player.draw();
-  
+  instance.process();
 
   if (!pause) {
     requestAnimationFrame(loop);

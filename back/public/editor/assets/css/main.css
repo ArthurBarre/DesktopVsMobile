@@ -1,0 +1,7 @@
+@import './reset.css';
+
+button {
+  width: 100px;
+  height: 40px;
+  font-size: 25px;
+}
