@@ -5,10 +5,13 @@ class Platform{
         this.width = width;
         this.height = height;
         this.color = 'white';
-        platforms.push(this);
+        instance.platforms.push(this);
     }
     draw(){
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    process() {
+        this.draw()
     }
 }

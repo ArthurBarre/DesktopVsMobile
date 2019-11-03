@@ -9,16 +9,17 @@ class Particle {
         this.velY = getRandomNumber(-5, 5)
         this.velX = getRandomNumber(-5, 5)
     }
-    particles.push(this)
     this.lifetime = 60 // in Frames
     this.alive = true
     this.life = 0
+
+    instance.particles.push(this)
   }
 
   draw() {
     this.life++
     if (this.life === this.lifetime) {
-      particles.splice(particles.indexOf(this), 1)
+      instance.particles.splice(instance.particles.indexOf(this), 1)
     }
     let opacity = 1 - (this.life/this.lifetime)
     //this.color = 'rgb(232,' + getRandomNumber(50, 232) + ',0)'
@@ -35,5 +36,7 @@ class Particle {
     this.x += this.velX
     this.y += this.velY
   }
-
+  process() {
+    this.draw()
+  }
 }

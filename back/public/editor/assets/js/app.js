@@ -8,35 +8,51 @@ var
   width = 1200,
   height = 800;
 
-// new Platform(0,0,50,height)
-// new Platform(1150,0,50,height)
-// new Platform(100,700,1000,50)
-
 canvas.width = width;
 canvas.height = height;
 
 var mouseX, mouseY
 
-// document.body.onmousemove = event => {
-//   mouseX = event.clientX
-//   mouseY = event.clientY
-// }
-
 var click = false;
 var pointX, pointY;
 var pointX2, pointY2;
 
-document.querySelector('button').addEventListener('click', () => {
+document.querySelector('.save').addEventListener('click', () => {
   let json = JSON.stringify(platforms)
   io.emit('json', json)
 })
 
+document.querySelector('.clear').addEventListener('click', () => {
+  platforms = []
+  background()
+})
+
+document.querySelector('.undo').addEventListener('click', () => {
+  platforms.pop()
+  background()
+})
+
+// BACKGROUND
+var background = function(value) {
+  ctx.clearRect(0,0,width,height)
+  ctx.fillStyle='rgb(0,0,0)';
+  ctx.fillRect(0,0,width, height)
+
+  for (let x = 0; x <= width/20; x++) {
+    for (let y = 0; y <= height/20; y++) {
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'
+      ctx.beginPath()
+      ctx.arc(x*20, y*20, 2, 0, 2 * 3.1415)
+      ctx.fill();
+    }
+  }
+}
 
 document.querySelector('main').addEventListener('click', (event) => {
   if (click) {
     click = false;
-    pointX2 = event.clientX;
-    pointY2 = event.clientY -50;
+    pointX2 = Math.round(event.clientX/20)*20
+    pointY2 = (Math.round(event.clientY/20)*20) - 40
     let platX, platY, platWidth, platHeight
     if ( pointX > pointX2 ) {
       platX = pointX2;
@@ -53,22 +69,19 @@ document.querySelector('main').addEventListener('click', (event) => {
       platHeight= pointY2 - pointY
     }
 
-    new Platform( platX, platY, platWidth, platHeight);
-    console.log(platforms)
+    if (platWidth > 0 && platHeight > 0 )  {
+      new Platform( platX, platY, platWidth, platHeight);
+      console.log(platforms)
+    }
   } else {
     click = true;
-    pointX = event.clientX;
-    pointY = event.clientY - 50;
+    pointX = Math.round(event.clientX/20)*20
+    pointY = (Math.round(event.clientY/20)*20) - 40
   }
 })
 
+background()
 var loop = function() {
-  ctx.clearRect(0, 0, width, height);
-  // BACKGROUND
-  
-
-  ctx.fillStyle='rgb(0,0,0)';
-  ctx.fillRect(0,0,width, height)
 
   platforms.forEach(platform=>{
     platform.draw()

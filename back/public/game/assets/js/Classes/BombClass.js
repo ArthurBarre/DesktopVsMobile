@@ -12,7 +12,7 @@ class Bomb {
     this.explode = false;
     this.bounce = 2;
     this.explosion();
-    bombs.push(this);
+    instance.bombs.push(this);
   }
 
   draw() {
@@ -22,18 +22,24 @@ class Bomb {
         this.radius += 3;
         ctx.fillStyle = 'rgba(255,255,0,'+ (100-this.radius)/100 +')'
       }  else {
-        bombs.splice(bombs.indexOf(this), 1)
+        instance.bombs.splice(instance.bombs.indexOf(this), 1)
+      }
+      if (instance.player.x > this.x - this.radius && instance.player.x < this.x + this.radius && instance.player.y > this.y - this.radius && instance.player.y < this.y +  this.radius) {
+        instance.player.life -= 0.5
       }
     }
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * 3.1415);
     ctx.fill();
-    engine(this);
   }
 
   explosion() {
     setTimeout(() => {
       this.explode = true;
     }, 4000);
+  }
+
+  process() {
+    this.draw()
   }
 }
